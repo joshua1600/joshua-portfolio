@@ -29,7 +29,7 @@ export const Hero: React.FC = () => {
             <span className="text-[#0071E3]">Solve.</span>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-gray-500 font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
-            I build scalable web applications with pixel-perfect precision and thoughtful interactions.
+            I build tools that turn messy business operations into streamlined digital workflows.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">

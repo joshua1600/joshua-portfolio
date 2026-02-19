@@ -147,25 +147,50 @@ export const UniversalProjectViewer: React.FC<UniversalProjectViewerProps> = ({ 
 
             {/* Type: Desktop */}
             {projectType === 'desktop' && (
-              <div className="relative w-full h-full bg-black group/video cursor-pointer" onClick={handleVideoPlay}>
-                <video
-                  ref={videoRef}
-                  src={contentSrc}
-                  className="w-full h-full object-cover"
-                  loop
-                  onPlay={() => setIsPlaying(true)}
-                  onPause={() => setIsPlaying(false)}
-                />
+              contentSrc.includes('drive.google.com') ? (
+                /* Google Drive video embed */
+                <>
+                  {isLoading && (
+                    <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/80 backdrop-blur-md transition-opacity duration-500">
+                      <div className="flex flex-col items-center gap-4">
+                        <Loader2 className="w-8 h-8 sm:w-10 sm:h-10 text-white animate-spin" />
+                        <p className="text-sm sm:text-base font-medium text-gray-300 animate-pulse">
+                          Loading demo video...
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  <iframe
+                    src={contentSrc}
+                    className="w-full h-full border-none"
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    onLoad={handleIframeLoad}
+                    title="Desktop App Demo"
+                  />
+                </>
+              ) : (
+                /* Direct video file */
+                <div className="relative w-full h-full bg-black group/video cursor-pointer" onClick={handleVideoPlay}>
+                  <video
+                    ref={videoRef}
+                    src={contentSrc}
+                    className="w-full h-full object-cover"
+                    loop
+                    onPlay={() => setIsPlaying(true)}
+                    onPause={() => setIsPlaying(false)}
+                  />
 
-                {/* Play Button Overlay */}
-                <div className={`absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] transition-all duration-500 ${isPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-                  <button
-                    className="w-16 h-16 sm:w-24 sm:h-24 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-2xl transition-transform duration-300 hover:scale-110 group-hover/video:bg-white/20"
-                  >
-                    <Play className="w-8 h-8 sm:w-10 sm:h-10 text-white fill-white ml-1 sm:ml-2" />
-                  </button>
+                  {/* Play Button Overlay */}
+                  <div className={`absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] transition-all duration-500 ${isPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+                    <button
+                      className="w-16 h-16 sm:w-24 sm:h-24 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 shadow-2xl transition-transform duration-300 hover:scale-110 group-hover/video:bg-white/20"
+                    >
+                      <Play className="w-8 h-8 sm:w-10 sm:h-10 text-white fill-white ml-1 sm:ml-2" />
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )
             )}
 
           </div>

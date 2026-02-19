@@ -51,6 +51,32 @@ export const PROJECTS: Project[] = [
     projectType: 'appscript',
     contentSrc: 'https://script.google.com/macros/s/AKfycbzcQI7r5_3sXKCaIUDDEgk35y96-EmE0NkBZdCiG7gnx8oA2kmGuwtpkzPpXo_whg2HxA/exec',
   },
+  {
+    id: 4,
+    title: 'Personal Portfolio',
+    category: 'Web Design',
+    description: 'A modern portfolio website featuring smooth animations, responsive design, and interactive project showcases.',
+    image: 'https://picsum.photos/id/180/600/600',
+    tags: ['React', 'TypeScript', 'Tailwind', 'Framer Motion', 'Vite', 'Vercel'],
+    link: 'https://joshua-lee-portfolio.vercel.app',
+    year: '2026',
+    className: 'md:col-span-1 md:row-span-1',
+    projectType: 'web',
+    contentSrc: 'https://joshua-lee-portfolio.vercel.app',
+  },
+  {
+    id: 5,
+    title: 'Fishing Hub One',
+    category: 'Desktop Application',
+    description: 'A complete desktop application for managing fishing pond operations with check-in/checkout, POS, shift tracking, and reporting features.',
+    image: 'https://picsum.photos/id/119/600/600',
+    tags: ['Python', 'CustomTkinter', 'SQLite', 'ReportLab'],
+    link: '#',
+    year: '2026',
+    className: 'md:col-span-1 md:row-span-1',
+    projectType: 'desktop',
+    contentSrc: 'https://drive.google.com/file/d/1sssMo2etzth8S3DNhEVZqOiDN9wM_4kZ/preview',
+  },
 ];
 
 export const EXPERIENCES: Experience[] = [
@@ -72,7 +98,7 @@ export const EXPERIENCES: Experience[] = [
   },
   {
     id: 3,
-    role: 'Part Time Tutor',
+    role: 'Programming Tutor',
     company: 'Build A Genius Sdn. Bhd.',
     period: '2024 — 2026',
     description: 'Teach basic programming concepts in Scratch and Python to children aged 6-16 via 1-on-1 sessions on Zoom and Google Meet.',

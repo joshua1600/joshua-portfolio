@@ -1,14 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { PROJECTS } from '../constants';
 import { Project } from '../types';
 import { FadeIn } from './ui/FadeIn';
 import { UniversalProjectViewer } from './UniversalProjectViewer';
-import { ArrowUpRight, X, ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowUpRight, X, ArrowRight, ExternalLink, Copy, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const Projects: React.FC = () => {
   const [isArchiveOpen, setIsArchiveOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+
+  const handleCopy = useCallback((text: string, field: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 2000);
+  }, []);
 
   // Only show the first 3 projects in the featured grid
   const featuredProjects = PROJECTS.slice(0, 3);
@@ -335,13 +342,48 @@ export const Projects: React.FC = () => {
                   </div>
 
                   <a
-                    href={selectedProject.link}
+                    href={selectedProject.projectType === 'desktop' ? (selectedProject.contentSrc || '#') : selectedProject.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-[#0071E3] text-white font-semibold text-base shadow-md hover:bg-[#0066CC] active:scale-[0.98] transition-all"
+                    className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-[#0071E3] text-white font-semibold text-base shadow-md hover:bg-[#0066CC] active:scale-[0.98] transition-all mb-6"
                   >
-                    Open Live Demo <ExternalLink className="w-4 h-4" />
+                    {selectedProject.projectType === 'desktop' ? 'Watch Demo Video' : 'Open Live Demo'} <ExternalLink className="w-4 h-4" />
                   </a>
+
+                  {/* Mobile Credentials Helper */}
+                  {selectedProject.credentials && (
+                    <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-green-400" />
+                          <span className="text-xs font-bold uppercase tracking-wider text-gray-500">Demo Credentials</span>
+                        </div>
+                        <span className="text-[10px] text-gray-400">Tap to copy</span>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <button
+                          onClick={() => handleCopy(selectedProject.credentials!.username || '', 'username')}
+                          className="text-left p-3 rounded-xl bg-[#F5F5F7] hover:bg-[#ECECEE] active:scale-[0.97] transition-all"
+                        >
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-[10px] text-gray-400 uppercase">Username</span>
+                            {copiedField === 'username' ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3 text-gray-300" />}
+                          </div>
+                          <p className="text-sm font-semibold text-[#1D1D1F]">{selectedProject.credentials.username}</p>
+                        </button>
+                        <button
+                          onClick={() => handleCopy(selectedProject.credentials!.password || '', 'password')}
+                          className="text-left p-3 rounded-xl bg-[#F5F5F7] hover:bg-[#ECECEE] active:scale-[0.97] transition-all"
+                        >
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-[10px] text-gray-400 uppercase">Password</span>
+                            {copiedField === 'password' ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3 text-gray-300" />}
+                          </div>
+                          <p className="text-sm font-semibold text-[#1D1D1F]">{selectedProject.credentials.password}</p>
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
