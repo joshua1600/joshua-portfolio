@@ -1,20 +1,67 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Joshua Lee — Personal Portfolio
 
-# Run and deploy your AI Studio app
+A modern, responsive portfolio website featuring smooth animations, interactive project showcases, and a clean Apple-inspired design.
 
-This contains everything you need to run your app locally.
+🔗 **Live:** [joshua-lee-portfolio.vercel.app](https://joshua-lee-portfolio.vercel.app)
 
-View your app in AI Studio: https://ai.studio/apps/drive/1AFuFeJgJn-eGE5yE5U1kTtjdAOwVb37e
+## Tech Stack
+
+- **React** + **TypeScript** — UI components
+- **Tailwind CSS** — Styling
+- **Framer Motion** — Animations
+- **Vite** — Build tool
+- **Vercel** — Hosting
+
+## Features
+
+- Apple-style design with smooth scroll animations
+- Interactive project viewer (MacBook frame with live iframe demos)
+- Google Drive video embed support for desktop app demos
+- Horizontal snap-scroll carousels on mobile
+- Collapsible experience cards on mobile
+- Demo credentials helper with copy-to-clipboard
+- Downloadable CV from the navbar
+- Fully responsive across all devices
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
+**Prerequisites:** Node.js
 
+```bash
+npm install
+npm run dev
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Deploy
+
+Push to `main` — Vercel auto-deploys via GitHub integration.
+
+```bash
+git add -A && git commit -m "your message"
+git push origin main
+```
+
+## Project Structure
+
+```
+├── components/
+│   ├── Contact.tsx         # Contact section with horizontal carousel
+│   ├── Experience.tsx      # Experience with collapsible mobile cards
+│   ├── Footer.tsx          # Footer with social links
+│   ├── Hero.tsx            # Hero section
+│   ├── Navbar.tsx          # Navigation bar with CV download
+│   ├── Projects.tsx        # Project grid + archive + detail viewer
+│   ├── UniversalProjectViewer.tsx  # MacBook viewer (iframe/video)
+│   └── ui/FadeIn.tsx       # Scroll-based fade-in animation
+├── constants.ts            # Projects, experiences, nav links data
+├── types.ts                # TypeScript types
+├── App.tsx                 # Main app layout
+├── index.tsx               # Entry point
+└── public/
+    ├── resume.pdf          # Downloadable CV
+    └── projects/           # Project cover images
+```
+
+## License
+
+© 2026 Joshua Lee. All rights reserved.
